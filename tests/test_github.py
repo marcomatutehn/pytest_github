@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-SCROLL_PAUSE_TIME = 50
+SCROLL_PAUSE_TIME = 0.5
 
 
 # Selectors
@@ -56,16 +56,28 @@ class GitHubAutomation:
         btn_repository = driver.find_element(By.XPATH,
                                              '//*[@id="js-pjax-container"]/div/div[3]/div/ul/li/div[2]/div[1]/div[1]/a')
         btn_repository.click()
-
         btn_readme = driver.find_element(By.XPATH,
                                          '//*[@id="repo-content-pjax-container"]/div/div[2]/div[1]/div[2]/div[3]/div[1]/div[5]/div[2]/span/a')
         btn_readme.click()
+        time.sleep(1.5)
 
-       # readme_text = driver.find_element(By.XPATH, '/html/body/div[4]/div/main/div[2]/div/div/readme-toc/div/div[2]/article')
-        # Review this part
-        #readme_text.text
-        #print("Result : " + readme_text)
+        btn_rawurl = driver.find_element(By.ID, 'raw-url')
+        btn_rawurl.click()
 
+        readme_text = driver.find_element(By.XPATH, '/html/body/pre').text
+
+        print("\n\n=======================================================")
+        print("\n\nTITLE: First 300 characters (WITH space) of readme:")
+        readme_str_withspace = readme_text[0:299]
+        print("\n" + readme_str_withspace)
+        print("\n\n=======================================================")
+
+        print("\n\n=======================================================")
+        print("\n\nTITLE: First 300 characters (WITHOUT space) of readme:")
+        readme_text_withouspace = readme_text.replace(" ", "")
+        readme_str_withoutspace = readme_text_withouspace[0:299]
+        print("\n" + readme_str_withoutspace)
+        print("\n\n=======================================================")
         time.sleep(SCROLL_PAUSE_TIME)
 
         driver.close()
