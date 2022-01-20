@@ -51,8 +51,13 @@ class GitHubAutomation:
 
         btn_search = driver.find_element(By.XPATH, '//*[@id="search_form"]/div[2]/div/div/button')
         btn_search.click()
+
         # Verify the repository
+        assert "1" in driver.find_element(By.XPATH, '//*[@id="js-pjax-container"]/div/div[2]/nav[1]/a[1]/span').text
+
         # Verify that the result list includes this repository: `mvoloskov/decider`
+        assert "mvoloskov/decider" in driver.find_element(By.XPATH, '//*[@id="js-pjax-container"]/div/div[3]/div/ul/li/div[2]/div[1]/div[1]/a').text
+
         btn_repository = driver.find_element(By.XPATH,
                                              '//*[@id="js-pjax-container"]/div/div[3]/div/ul/li/div[2]/div[1]/div[1]/a')
         btn_repository.click()
