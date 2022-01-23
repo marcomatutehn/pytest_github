@@ -49,7 +49,8 @@ LBL_README_TEXT = '/html/body/pre'
 
 class GitHubAutomation:
 
-    def test_pytest_guthub(self):
+    @staticmethod
+    def test_pytest_github():
         driver = webdriver.Chrome(executable_path=EXECUTABLE_PATH)
 
         driver.get(URL_GITHUB)
@@ -130,4 +131,4 @@ class GitHubAutomation:
 
 
 githubautomation = GitHubAutomation()
-githubautomation.test_pytest_guthub()
+githubautomation.test_pytest_github()
